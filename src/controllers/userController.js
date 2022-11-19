@@ -1,6 +1,6 @@
 const User = require("../models/user")
-const {sign, verify} = require('../utils/jwt')
 const { StatusCodes } = require('http-status-codes')
+const jwt = require('jsonwebtoken')
 
 exports.creatUser = async(req, res)=>{
     try {
@@ -34,7 +34,8 @@ exports.login = async(req, res)=>{
             error: getReasonPhrase(StatusCodes.NOT_FOUND)
         })
     }else{
-        res.status(StatusCodes.OK).json({user})
+        const token = jwt.sign(user.toJSON(), "hello world", { expiresIn: '24h' })
+        res.json({token})
     }
     } catch (err) {
         res.status(StatusCodes.INTERNAL_SERVER_ERROR)
