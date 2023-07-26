@@ -1,0 +1,56 @@
+input CreateUserInput {
+  start_date: String
+  end_date
+  name: String
+  description
+}
+
+input CreateLocationInput {
+  lang: number
+  leng: number
+}
+
+
+
+type Mutation {
+  createUser(createUser: CreateUserInput!): UserEntity!
+  removeUser(id: Float!): Float!
+  updateUser(updateUser: UpdateUserInput!): UserEntity!
+}
+
+type Query {
+  getAllUsers: [UserEntity!]!
+  getOneUser(id: Float!): UserEntity!
+}
+
+input UpdateUserInput {
+  start_date
+  end_date
+  description: String
+  id: ID!
+  name: String
+}
+
+input UpdateLocationInput {
+  lang
+  leng
+}
+
+
+type UserEntity {
+  createdAt: DateTime!
+  start_date
+  end_date
+  description: String
+  id: ID!
+  name: String
+  updatedAt: DateTime!
+}
+
+type LocationEntity {
+  createdAt: DateTime!
+  leng: String
+  id: ID!
+  lang: String
+  updatedAt: DateTime!
+}
